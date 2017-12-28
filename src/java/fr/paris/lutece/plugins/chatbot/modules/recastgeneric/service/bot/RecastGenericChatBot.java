@@ -33,7 +33,8 @@
  */
 package fr.paris.lutece.plugins.chatbot.modules.recastgeneric.service.bot;
 
-import fr.paris.lutece.portal.service.util.AppPropertiesService;
+import fr.paris.lutece.plugins.chatbot.business.BotPost;
+import fr.paris.lutece.plugins.chatbot.business.Post;
 import fr.paris.lutece.plugins.chatbot.service.bot.AbstractChatBot;
 import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.plugins.recast.business.DialogResponse;
@@ -68,9 +69,9 @@ public class RecastGenericChatBot extends AbstractChatBot implements ChatBot
      * {@inheritDoc }
      */
     @Override
-    public List<String> processUserMessage( String strMessage, String strConversationId, Locale locale )
+    public List<BotPost> processUserMessage( String strMessage, String strConversationId, Locale locale )
     {
-        List<String> listMessages = new ArrayList<>();
+        List<BotPost> listMessages = new ArrayList<>();
         DialogResponse response = null;
         if( !DatastoreService.existsKey( DSKEY_TOKEN ) )
         {
@@ -79,7 +80,8 @@ public class RecastGenericChatBot extends AbstractChatBot implements ChatBot
         String strToken = getToken();
         if( strToken.equals( NOT_DEFINED ) )
         {
-            listMessages.add( MSG_INVALID_CONFIG );
+            BotPost post = new BotPost( MSG_INVALID_CONFIG );
+            listMessages.add( post );
             return listMessages;
         }
         
@@ -96,7 +98,8 @@ public class RecastGenericChatBot extends AbstractChatBot implements ChatBot
         {
             for( Message message : response.getMessages() )
             {
-                listMessages.add( message.getContent() );
+                BotPost post = new BotPost( message.getContent() );
+                listMessages.add( post );
             }
         }
         return listMessages;
