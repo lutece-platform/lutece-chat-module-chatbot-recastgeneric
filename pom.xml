@@ -66,6 +66,11 @@
         <jiraProjectName>BOTRECAST</jiraProjectName>
         <jiraComponentId></jiraComponentId>
     </properties>
-    
-    
+
+    <scm>
+        <connection>scm:git:https://github.com/lutece-platform/lutece-chat-module-chatbot-recastgeneric.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-chat-module-chatbot-recastgeneric.git</developerConnection>
+        <url>https://github.com/lutece-platform/lutece-chat-module-chatbot-recastgeneric.git</url>
+    </scm>
+
 </project>
